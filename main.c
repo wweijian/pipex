@@ -1,18 +1,17 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: wjhoe <wjhoe@student.42singapore.sg>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 10:05:50 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/12 12:09:52 by wjhoe            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "pipex.h"
+#include <string.h>
+#include <stdio.h>
 
 int main (int ac, char **av, char **envp)
 {
-	validate_argument(ac, av, envp);
+
+
+	while (*envp)
+	{
+		if (!strncmp(*envp, "PATH=", 5) && *envp[6] != 0)
+		{
+			printf("path directory:\n%s \n ", *envp);
+			return (0);
+		}
+		envp++;
+	}
 }
