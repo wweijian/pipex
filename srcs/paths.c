@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wjhoe <wjhoe@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/14 14:50:30 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/14 15:04:09 by wjhoe            ###   ########.fr       */
+/*   Created: 2025/06/15 17:38:53 by wjhoe             #+#    #+#             */
+/*   Updated: 2025/06/15 17:44:35 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	split_directories(t_data *data)
+char	**split_paths(char *path_envp)
 {
-	char	**split;
+	char	**paths;
 	int		i;
+	char	*temp;
 
-	split = ft_split(data->envp, ':');
 	i = 0;
-	while (i < )
+	paths = ft_split(path_envp, ':');
+	while (paths[i])
+	{
+		temp = ft_strjoin(paths[i], "/");
+		free(paths[i]);
+		paths[i] = temp;
+	}
+	return (paths);
 }

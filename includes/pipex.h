@@ -6,7 +6,7 @@
 /*   By: wjhoe <wjhoe@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:07:00 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/14 14:45:14 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/15 17:32:57 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_heredoc
 typedef struct s_commands
 {	
 	char		*command;
-	char		*path;
 	char		**options;
 }					t_commands;
 
@@ -44,7 +43,6 @@ typedef struct s_data
 	int			fd_out;
 	int			*pipe;
 	int			*pid;
-	int			child;
 }				t_data;
 
 #endif

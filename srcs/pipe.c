@@ -6,7 +6,7 @@
 /*   By: wjhoe <wjhoe@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 12:37:09 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/14 15:26:31 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/15 17:40:27 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,10 @@ void	ft_pipe (t_data *data)
 	int	child;
 
 	child = 0;
-	while (child < data->cmds.count)
+	while (child < data->cmd_count)
 	{
-		data->cmds.options = ft_split(data->cmds.command[child], ' ');
-		if (!data->cmds.options)
-			error_msg("malloc failure in program");
-		data->cmds.path = get_command_path(data->cmds.command);
+		
 	}
-}
-
-char	*get_command_path(char *command)
-{
-	char	*command_path;
-	
-	if (!access(command, F_OK | X_OK))
-		return(ft_strdup(command));
-	
 }
 
 /* 
@@ -50,4 +38,8 @@ char	*get_command_path(char *command)
 	
 	how do i know which path is relevant to which function though?
 	
+*/
+
+/* 
+	what is the pipe function trying to do? 
 */

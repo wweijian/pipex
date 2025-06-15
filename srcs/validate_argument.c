@@ -6,7 +6,7 @@
 /*   By: wjhoe <wjhoe@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:09:34 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/14 15:15:21 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/15 17:22:30 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	check_envp(int ac, char **envp, t_data *data)
 		if (!ft_strncmp(*envp, "PATH=", 5) && *envp[6] != 0)
 		{
 			data->envp = ft_substr(*envp, 6, ft_strlen(*envp));
-			split_directories(data);
 			return ;
 		}
 		envp++;
@@ -64,7 +63,7 @@ void	check_filein(char** av, t_data *data)
 
 void	check_fileout(int ac, char **av, t_data *data)
 {
-	if (data->heredoc.fd > 0)
+	if (data->heredoc.fd > 0) // ya okay i might not want to open it until work  needs to be done
 		data->fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 664);
 	else
 		data->fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 664);

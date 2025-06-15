@@ -6,7 +6,7 @@
 /*   By: wjhoe <wjhoe@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 12:37:46 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/14 15:12:57 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/15 17:39:48 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 void	init_data (int ac, char **av, char **envp, t_data *data)
 {
+	char	**paths;
+	
 	data = default_init();
 	validate_argument(ac, av, envp, data);
 	make_pipe(ac, av, data);
-	make_cmd(ac, av, data);
+	paths = split_path(data->envp);
+	make_cmd(ac, av, paths, data);
 }
 
 void	make_pipe (int ac, char **av, t_data *data)
@@ -49,20 +52,3 @@ t_data	*default_init(void)
 	data->cmd_count = 0;
 }
 
-void	make_cmd(int ac, char **av, t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = 2;
-	j = 0;
-	if (data->heredoc.fd >= 0)
-		i++;
-	data->cmd = malloc(sizeof(*data->cmd) * data->cmd_count);
-	while (i < ac - 2)
-	{
-		data->cmd[j].command = av[i];
-		i++;
-		j++;
-	}
-}
