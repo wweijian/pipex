@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_argument.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjhoe <wjhoe@student.42singapore.sg>       +#+  +:+       +#+        */
+/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:09:34 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/15 17:22:30 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/16 22:26:01 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	validate_argument (int ac, char **av, char **envp, t_data *data)
 {
 	check_heredoc(av, data);
-	if ((data->heredoc.fd < 0 && ac < 4) || (data->heredoc.fd >= 0 && ac < 6))
-		error_msg("not enough arguments", data);
+	// if ((data->heredoc.fd < 0 && ac < 4) || (data->heredoc.fd >= 0 && ac < 6))
+	// 	error_msg("not enough arguments", data);
 	check_envp(ac, envp, data);
 	if (data->heredoc.fd < 0)
 		check_filein(av, data);
@@ -25,48 +25,33 @@ void	validate_argument (int ac, char **av, char **envp, t_data *data)
 
 void	check_envp(int ac, char **envp, t_data *data)
 {
+	int	i;
+
+	i = 0;
 	data->cmd_count = ac - 3;
+	printf("cmd count: %d\n",data->cmd_count);
 	if (data->heredoc.fd >= 0)
 		data->cmd_count--;
-	while (*envp)
+	while (envp[i])
 	{
-		if (!ft_strncmp(*envp, "PATH=", 5) && *envp[6] != 0)
+		if (!ft_strncmp(envp[i], "PATH=", 5) && envp[i][6] != 0)
 		{
-			data->envp = ft_substr(*envp, 6, ft_strlen(*envp));
+			data->path_variable = ft_substr(envp[i], 6, ft_strlen(envp[i]));
 			return ;
 		}
-		envp++;
+		i++;
 	}
-	error_msg("no \"PATH=\ variable found", data);
+	error_msg("no \"PATH=\" variable found", data);
 }
 
 void	check_heredoc(char **av, t_data *data)
 {
-	if (ft_strncmp(av[1], "here_doc", 9))
+	if (!ft_strncmp(av[1], "here_doc", 9))
 	{
-		data->heredoc.fd = open(av[1], O_RDONLY);
-		if (data->heredoc.fd == -1)
-			error_msg("error parsing here_doc", data);
+		data->heredoc.fd = 1;
 		if (av[2])
 			data->heredoc.limiter = ft_strdup(av[2]);
 	}
 	else
 		data->heredoc.fd = -2048;
-}
-
-void	check_filein(char** av, t_data *data)
-{
-	data->fd_in = open(av[1], O_RDONLY);
-	if (data->fd_in < 0)
-		error_msg("error handling input file", data);	
-}
-
-void	check_fileout(int ac, char **av, t_data *data)
-{
-	if (data->heredoc.fd > 0) // ya okay i might not want to open it until work  needs to be done
-		data->fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 664);
-	else
-		data->fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 664);
-	if (data->fd_in < 0)
-		error_msg("error handling input file", data);
 }

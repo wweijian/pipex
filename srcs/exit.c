@@ -6,7 +6,7 @@
 /*   By: wjhoe <wjhoe@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:50:03 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/14 09:54:40 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/15 22:59:32 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	error_msg(char *msg, t_data *data)
 void	free_and_exit(t_data *data)
 {
 	(void) data;
-	exit(errno);
+	exit(0);
 }
 
 void	close_pipe (t_data *data)
@@ -29,7 +29,7 @@ void	close_pipe (t_data *data)
 	int	i;
 
 	i = 0;
-	while (i < data->cmds.count * 2 - 1)
+	while (i < data->cmd_count * 2 - 1)
 	{
 		close(data->pipe[i]);
 		i++;
