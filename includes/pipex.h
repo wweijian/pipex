@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:07:00 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/17 10:27:02 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/17 16:41:24 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	check_fileout(int ac, char **av, t_data *data);
 
 void	ft_pipe (t_data *data);
 void	execute_child_process(t_data *data, int child);
-void	redirect_command(int input_fd, int output_fd, t_data *data);
+void	execute_command(int input_fd, int output_fd, t_data *data, int child);
 int		check_exit_status(t_data *data, int child);
 
 void	open_heredoc(t_data *data);
