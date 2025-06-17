@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_files.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 22:11:32 by weijian           #+#    #+#             */
-/*   Updated: 2025/06/17 10:26:14 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/17 15:11:31 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_filein(char** av, t_data *data)
 
 void	check_fileout(int ac, char **av, t_data *data)
 {
-	if (data->heredoc.fd > 0) // ya okay i might not want to open it until work  needs to be done
+	if (data->heredoc.fd > 0) // ya okay i might not want to open it until work needs to be done
 		data->fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 664);
 	else
 		data->fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 664);
@@ -46,7 +46,7 @@ void	open_heredoc(t_data *data)
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
 			break ;
-		if (ft_strncmp(line, data->heredoc.limiter, ft_strlen(data->heredoc.limiter) + 1))
+		if (!ft_strncmp(line, data->heredoc.limiter, ft_strlen(data->heredoc.limiter) + 1))
 			break ;
 		else
 			ft_putstr_fd(line, temp_fd);

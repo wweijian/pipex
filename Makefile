@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: weijian <weijian@student.42.fr>            +#+  +:+       +#+         #
+#    By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/15 21:46:33 by wjhoe             #+#    #+#              #
-#    Updated: 2025/06/17 10:41:45 by weijian          ###   ########.fr        #
+#    Updated: 2025/06/17 14:33:47 by wjhoe            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,9 +37,11 @@ ${NAME}: ${LIBFT} ${OBJS} ${HDRS}
 ${LIBFT}:
 	make -C libft
 
-${OBJS_PATH}%.o: ${SRCS_PATH}%.c ${HDRS}
-	mkdir -p ${OBJS_PATH}
+${OBJS_PATH}%.o: ${SRCS_PATH}%.c ${HDRS} | ${OBJS_PATH}
 	${CC} ${CFLAGS} -c $< -I${HDRS} -o $@
+
+${OBJS_PATH}:
+	mkdir -p ${OBJS_PATH}
 
 bonus: ${NAME}
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 12:37:09 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/16 21:38:55 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/17 16:05:45 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,19 @@ void	ft_pipe (t_data *data)
 	{
 		data->cmd[child].pid = fork();
 		if(data->cmd[child].pid)
-			printf("data->cmd[child].pid: %d\n",data->cmd[child].pid);
+			printf("[%d](cmd: %s) data->cmd[child].pid: %d\n",child,data->cmd[child].command, data->cmd[child].pid);
 		if (data->cmd[child].pid == -1)
 			return(error_msg("fork process failed", data));
 		if (data->cmd[child].pid == 0)
+		{
+			printf("[%d](cmd: %s) data->cmd[child].pid: %d\n",child,data->cmd[child].command, data->cmd[child].pid);
 			execute_child_process(data, child);
+			printf("I will not be reached");
+		}
 		child++;
 	}
 	close_files(data);
-	check_exit_status(data, child - 1);
+	check_exit_status(data, data->cmd_count - 1);
 }
 
 void	execute_child_process(t_data *data, int child)
@@ -61,13 +65,15 @@ int	check_exit_status(t_data *data, int child)
 	pid_t	wpid;
 	int		exit_code;
 	int		status;
+	int		i;
 
 	exit_code = 1;
+	i = 0;
 	printf("children: %d\n", child);
-	while (child >= 0)
+	while (i < child)
 	{
-		printf("[CES] data->cmd[child].pid %d\n", data->cmd[child].pid);
-		wpid = waitpid(data->cmd[child].pid, &status, 0);
+		printf("[CES] data->cmd[child].pid %d\n", data->cmd[i].pid);
+		wpid = waitpid(data->cmd[i].pid, &status, 0);
 		if (wpid == -1)
 			error_msg("waitpid failed", data);
 		if (wpid == data->cmd[data->cmd_count - 1].pid)
@@ -75,7 +81,7 @@ int	check_exit_status(t_data *data, int child)
 			if(WIFEXITED(status))
 				exit_code = WEXITSTATUS(status);
 		}
-		child--;
+		i++;
 	}
 	return(exit_code);
 }

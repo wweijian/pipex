@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_argument.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:09:34 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/17 10:44:59 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/17 15:45:08 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 void	validate_argument (int ac, char **av, char **envp, t_data *data)
 {
-	if (ac < 4)
+	if (ac < 5)
 		error_msg("not enough arguments", data);
 	check_heredoc(av, data);
 	if ((data->heredoc.fd >= 0 && ac < 6))
 		error_msg("not enough arguments", data);
 	check_envp(ac, envp, data);
-	if (data->heredoc.fd < 0)
-		check_filein(av, data);
+	check_filein(av, data);
 	check_fileout(ac, av, data);
 }
 
@@ -31,9 +30,9 @@ void	check_envp(int ac, char **envp, t_data *data)
 
 	i = 0;
 	data->cmd_count = ac - 3;
-	printf("cmd count: %d\n",data->cmd_count);
-	if (data->heredoc.fd >= 0)
+	if (data->heredoc.fd == 1)
 		data->cmd_count--;
+	printf("cmd count: %d\n",data->cmd_count);
 	while (envp[i])
 	{
 		if (!ft_strncmp(envp[i], "PATH=", 5) && envp[i][6] != 0)
@@ -52,7 +51,7 @@ void	check_heredoc(char **av, t_data *data)
 	{
 		data->heredoc.fd = 1;
 		if (av[2])
-			data->heredoc.limiter = ft_strdup(av[2]);
+			data->heredoc.limiter = ft_strjoin(av[2],"\n");
 	}
 	else
 		data->heredoc.fd = -2048;
