@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:09:34 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/16 22:26:01 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/17 10:44:59 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void	validate_argument (int ac, char **av, char **envp, t_data *data)
 {
+	if (ac < 4)
+		error_msg("not enough arguments", data);
 	check_heredoc(av, data);
-	// if ((data->heredoc.fd < 0 && ac < 4) || (data->heredoc.fd >= 0 && ac < 6))
-	// 	error_msg("not enough arguments", data);
+	if ((data->heredoc.fd >= 0 && ac < 6))
+		error_msg("not enough arguments", data);
 	check_envp(ac, envp, data);
 	if (data->heredoc.fd < 0)
 		check_filein(av, data);

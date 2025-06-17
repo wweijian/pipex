@@ -6,32 +6,49 @@
 #    By: weijian <weijian@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/15 21:46:33 by wjhoe             #+#    #+#              #
-#    Updated: 2025/06/16 22:22:20 by weijian          ###   ########.fr        #
+#    Updated: 2025/06/17 10:41:45 by weijian          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-INPUT = input
-OUTPUT = output
+NAME = pipex
 
-all: libft ${INPUT} ${OUTPUT}
-	clear
-	cc srcs/*.c gnl/*.c -I includes -L. libft/libft.a -o pipex
-	./pipex input true true true output
+HDRS = includes
 
-${INPUT}:
-	cc input.c -o input
+LIB_PATH = libft/
+LIBFT = ${LIB_PATH}libft.a
 
-${OUTPUT}:
-	cc output.c -o output
+SRCS_PATH = srcs/
+SRCS = main.c \
+		check_files.c validate_argument.c init.c exit.c paths.c \
+		commands.c pipe.c gnl_bonus.c gnl_utils_bonus.c
+SRCS := ${addprefix ${SRCS_PATH}, ${SRCS}}
 
-libft:
-	make -sC libft
+OBJS_PATH = objs/
+OBJS := $(addprefix ${OBJS_PATH}, ${notdir ${SRCS:.c=.o}})
+
+CC = cc
+CFLAGS = -Wall -Werror -Wextra
+
+all: ${NAME}
+
+${NAME}: ${LIBFT} ${OBJS} ${HDRS}
+	${CC} ${CFLAGS} ${OBJS} -I${HDRS} -L. ${LIBFT} -o ${NAME}
+
+${LIBFT}:
+	make -C libft
+
+${OBJS_PATH}%.o: ${SRCS_PATH}%.c ${HDRS}
+	mkdir -p ${OBJS_PATH}
+	${CC} ${CFLAGS} -c $< -I${HDRS} -o $@
+
+bonus: ${NAME}
 
 clean:
 	make -C libft clean
+	rm -rf ${OBJS}
 
-flcean:
-	rm pipex
+fclean: clean
 	make -C libft fclean
+	rm -rf ${NAME}
 
 .PHONY: libft

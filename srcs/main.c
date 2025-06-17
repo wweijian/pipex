@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:05:50 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/16 18:32:41 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/17 10:23:00 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ int main (int ac, char **av, char **envp)
 {
 	t_data	*data;
 	
-	data = init_data(ac, av, envp, data);
+	data = init_data(ac, av, envp);
 	ft_pipe(data);
 }

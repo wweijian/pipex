@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 22:11:32 by weijian           #+#    #+#             */
-/*   Updated: 2025/06/17 08:32:43 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/17 10:26:14 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	check_filein(char** av, t_data *data)
 {
 	if (data->heredoc.fd > 0)
-		open_heredoc(av, data);
+		open_heredoc(data);
 	else
 		data->fd_in = open(av[1], O_RDONLY);
 	if (data->fd_in < 0)
@@ -32,7 +32,7 @@ void	check_fileout(int ac, char **av, t_data *data)
 		error_msg("error handling input file", data);
 }
 
-void	open_heredoc(char **av, t_data *data)
+void	open_heredoc(t_data *data)
 {
 	int		temp_fd;
 	char	*line;
@@ -42,8 +42,8 @@ void	open_heredoc(char **av, t_data *data)
 		error_msg("error accessing heredoc", data);
 	while (1)
 	{
-		ft_putstr_fd("> ", STDIN_FILENO);
-		line = get_next_line;
+		ft_putstr_fd("> ", STDOUT_FILENO);
+		line = get_next_line(STDIN_FILENO);
 		if (!line)
 			break ;
 		if (ft_strncmp(line, data->heredoc.limiter, ft_strlen(data->heredoc.limiter) + 1))
