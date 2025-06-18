@@ -6,7 +6,7 @@
 /*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:07:00 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 17:26:13 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/18 17:44:18 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ void	create_process(t_data *data, int child);
 void	execute_command(int input_fd, int output_fd, t_data *data);
 int		check_exit_status(t_data *data, int child, pid_t pid);
 
-void	open_heredoc(t_data *data);
-
-
+void	open_heredoc(char** av, t_data *data);
 
 #endif
 

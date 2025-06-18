@@ -6,7 +6,7 @@
 /*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 22:11:32 by weijian           #+#    #+#             */
-/*   Updated: 2025/06/18 17:42:03 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/18 17:44:40 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	check_filein(char** av, t_data *data)
 {
 	if (data->heredoc > 0)
-		open_heredoc(data);
+		open_heredoc(av, data);
 	else
 		data->fd_in = open(av[1], O_RDONLY);
 	if (data->fd_in < -1)
@@ -35,7 +35,7 @@ void	check_fileout(int ac, char **av, t_data *data)
 		error_msg("NULL", av[ac - 1]);
 }
 
-void	open_heredoc(t_data *data)
+void	open_heredoc(char** av, t_data *data)
 {
 	int		temp_fd;
 	char	*line;
@@ -49,8 +49,8 @@ void	open_heredoc(t_data *data)
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
 			break ;
-		// if (!ft_strncmp(line, data->heredoc.limiter, ft_strlen(data->heredoc.limiter) + 1))
-		// 	break ;
+		if (!ft_strncmp(line, av[2], ft_strlen(av[2]) + 1))
+			break ;
 		else
 			ft_putstr_fd(line, temp_fd);
 		free(line);
