@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 22:11:32 by weijian           #+#    #+#             */
-/*   Updated: 2025/06/17 10:26:14 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 08:23:15 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_filein(char** av, t_data *data)
 {
-	if (data->heredoc.fd > 0)
+	if (data->heredoc > 0)
 		open_heredoc(data);
 	else
 		data->fd_in = open(av[1], O_RDONLY);
@@ -24,7 +24,7 @@ void	check_filein(char** av, t_data *data)
 
 void	check_fileout(int ac, char **av, t_data *data)
 {
-	if (data->heredoc.fd > 0) // ya okay i might not want to open it until work  needs to be done
+	if (data->heredoc > 0) // ya okay i might not want to open it until work  needs to be done
 		data->fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 664);
 	else
 		data->fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 664);
@@ -32,6 +32,7 @@ void	check_fileout(int ac, char **av, t_data *data)
 		error_msg("error handling input file", data);
 }
 
+/* 
 void	open_heredoc(t_data *data)
 {
 	int		temp_fd;
@@ -46,7 +47,7 @@ void	open_heredoc(t_data *data)
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
 			break ;
-		if (ft_strncmp(line, data->heredoc.limiter, ft_strlen(data->heredoc.limiter) + 1))
+		if (!ft_strncmp(line, data->heredoc.limiter, ft_strlen(data->heredoc.limiter) + 1))
 			break ;
 		else
 			ft_putstr_fd(line, temp_fd);
@@ -55,4 +56,5 @@ void	open_heredoc(t_data *data)
 	if (line)
 		free(line);
 	close(temp_fd);
-}
+	close_pipe(data);
+} */

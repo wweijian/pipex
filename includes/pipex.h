@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:07:00 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/17 10:27:02 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 08:04:34 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@
 # include "libft.h"
 # include "gnl_bonus.h"
 
-typedef struct s_heredoc
-{
-	int		fd;
-	char	*limiter;
-}				t_heredoc;
 
 typedef struct s_commands
 {	
@@ -39,7 +34,7 @@ typedef struct s_data
 {
 	t_commands	*cmd;
 	int			cmd_count;
-	t_heredoc	heredoc;
+	int			heredoc;
 	char		**envp;
 	char		*path_variable;
 	int			fd_in;
@@ -56,7 +51,6 @@ char	**get_cmd_options(char** temp);
 char	*get_cmd_path(char *command, char **paths, t_data *data);
 int		count_options(char** temp);
 
-
 void	error_msg(char *msg, t_data *data);
 void	free_and_exit(t_data *data);
 void	close_pipe (t_data *data);
@@ -72,7 +66,7 @@ void	check_fileout(int ac, char **av, t_data *data);
 
 void	ft_pipe (t_data *data);
 void	execute_child_process(t_data *data, int child);
-void	redirect_command(int input_fd, int output_fd, t_data *data);
+void	execute_command(int input_fd, int output_fd, t_data *data);
 int		check_exit_status(t_data *data, int child);
 
 void	open_heredoc(t_data *data);

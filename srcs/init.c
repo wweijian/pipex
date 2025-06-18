@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 12:37:46 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/17 10:43:29 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 08:13:02 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,9 @@ t_data	*init_data (int ac, char **av, char **envp)
 	data = default_init(envp);
 	validate_argument(ac, av, envp, data);
 	data->pipe = make_pipe(data);
-	paths = split_paths(data->path_variable);
-	make_cmd(ac, av, paths, data);
+	// paths = split_paths(data->path_variable);
+	// make_cmd(ac, av, paths, data);
 	return (data);
-}
-
-int	*make_pipe (t_data *data)
-{
-	int	i;
-
-	i = 0;
-	data->pipe = malloc(sizeof(*(data->pipe)) * 2 * (data->cmd_count - 1));
-	printf("valid pipes:  ");
-	while (i < data->cmd_count - 1)
-	{
-		if(pipe(data->pipe + 2 * i) == -1)
-			error_msg("pipe failed to initialize", data);
-		i++;
-	}
-	printf("\n\n");
-	return (data->pipe);
 }
 
 t_data	*default_init(char** envp)
@@ -49,8 +32,7 @@ t_data	*default_init(char** envp)
 	data = malloc(sizeof(*data));
 	if (!data)
 		error_msg("initialization failed", data);
-	data->heredoc.fd = -1;
-	data->heredoc.limiter = NULL;
+	data->heredoc = 0;
 	data->envp = envp;
 	data->pipe = NULL;
 	data->cmd_count = 0;

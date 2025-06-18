@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:21:36 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/16 19:04:44 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 08:09:27 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	make_cmd(int ac, char **av, char **paths, t_data *data)
 
 	i = 2;
 	j = 0;
-	if (data->heredoc.fd >= 0)
+	if (data->heredoc >= 0)
 		i++;
 	data->cmd = malloc(sizeof(*data->cmd) * data->cmd_count);
 	while (i < ac - 1)
@@ -60,7 +60,6 @@ char	*get_cmd_path(char *command, char **paths, t_data *data)
 	i = 0;
 	while (paths[i])
 	{
-		// might need to check if i need to add a "/"
 		command_path = ft_strjoin(paths[i], command);
 		if (!access(command_path, F_OK | X_OK))
 		{

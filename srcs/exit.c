@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:50:03 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/17 09:50:26 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/17 13:07:42 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	close_pipe (t_data *data)
 	int	i;
 
 	i = 0;
-	while (i < data->cmd_count * 2 - 1)
+	while (i < (data->cmd_count - 1) * 2)
 	{
 		close(data->pipe[i]);
 		i++;
