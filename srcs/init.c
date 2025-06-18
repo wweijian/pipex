@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 12:37:46 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 08:13:02 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 10:56:43 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ t_data	*init_data (int ac, char **av, char **envp)
 	
 	data = default_init(envp);
 	validate_argument(ac, av, envp, data);
-	data->pipe = make_pipe(data);
-	// paths = split_paths(data->path_variable);
-	// make_cmd(ac, av, paths, data);
+	// data->pipe = make_pipe(data);
+	paths = split_paths(data->path_variable);
+	make_cmd(ac, av, paths, data);
 	return (data);
 }
 
@@ -34,7 +34,6 @@ t_data	*default_init(char** envp)
 		error_msg("initialization failed", data);
 	data->heredoc = 0;
 	data->envp = envp;
-	data->pipe = NULL;
 	data->cmd_count = 0;
 	return (data);
 }

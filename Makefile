@@ -6,7 +6,7 @@
 #    By: weijian <weijian@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/15 21:46:33 by wjhoe             #+#    #+#              #
-#    Updated: 2025/06/18 00:42:19 by weijian          ###   ########.fr        #
+#    Updated: 2025/06/18 09:48:03 by weijian          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ ${NAME}: ${LIBFT} ${OBJS} ${HDRS}
 ${LIBFT}:
 	make -C libft
 
-${OBJS_PATH}%.o: ${SRCS_PATH}%.c ${HDRS} ${OBJS_PATH}
+${OBJS_PATH}%.o: ${SRCS_PATH}%.c ${HDRS} | ${OBJS_PATH}
 	${CC} ${CFLAGS} -c $< -I${HDRS} -o $@
 
 ${OBJS_PATH}:
@@ -53,4 +53,4 @@ fclean: clean
 	make -C libft fclean
 	rm -rf ${NAME}
 
-.PHONY: libft
+.PHONY: libft all clean fclean 

@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:07:00 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 08:04:34 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 10:54:18 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ typedef struct s_data
 	char		*path_variable;
 	int			fd_in;
 	int			fd_out;
-	int			*pipe;
+	int			pipe[2];
 }				t_data;
 
 t_data	*init_data (int ac, char **av, char **envp);
-int		*make_pipe (t_data *data);
+// int		*make_pipe (t_data *data);
 t_data	*default_init(char** envp);
 
 void	make_cmd(int ac, char **av, char **paths, t_data *data);
@@ -65,7 +65,7 @@ void	check_filein(char** av, t_data *data);
 void	check_fileout(int ac, char **av, t_data *data);
 
 void	ft_pipe (t_data *data);
-void	execute_child_process(t_data *data, int child);
+void	create_process(t_data *data, int child);
 void	execute_command(int input_fd, int output_fd, t_data *data);
 int		check_exit_status(t_data *data, int child);
 

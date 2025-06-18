@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:09:34 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 08:06:04 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 10:55:49 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void	validate_argument (int ac, char **av, char **envp, t_data *data)
 {
-	if (ac < 4)
+	if (ac < 5)
 		error_msg("not enough arguments", data);
-	data->heredoc = check_heredoc(av, data);
-	if ((data->heredoc >= 0 && ac < 6))
+	check_heredoc(av, data);
+	// printf("data->heredoc %d\n", data->heredoc);
+	if ((data->heredoc > 0 && ac < 6))
 		error_msg("not enough arguments", data);
 	check_envp(ac, envp, data);
 	check_filein(av, data);
@@ -30,7 +31,7 @@ void	check_envp(int ac, char **envp, t_data *data)
 
 	i = 0;
 	data->cmd_count = ac - 3;
-	printf("cmd count: %d\n",data->cmd_count);
+	// printf("cmd count: %d\n",data->cmd_count);
 	if (data->heredoc >= 0)
 		data->cmd_count--;
 	while (envp[i])
@@ -45,7 +46,7 @@ void	check_envp(int ac, char **envp, t_data *data)
 	error_msg("no \"PATH=\" variable found", data);
 }
 
-int	check_heredoc(char **av, t_data *data)
+void	check_heredoc(char **av, t_data *data)
 {
 	if (!ft_strncmp(av[1], "here_doc", 9))
 	{
@@ -53,4 +54,5 @@ int	check_heredoc(char **av, t_data *data)
 	}
 	else
 		data->heredoc = 0;
+
 }

@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:21:36 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 08:09:27 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 10:55:06 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*get_cmd_path(char *command, char **paths, t_data *data)
 		command_path = ft_strjoin(paths[i], command);
 		if (!access(command_path, F_OK | X_OK))
 		{
-			printf("%s \n", command_path); // this prints out the right command path
+			// printf("command path: %s \n", command_path); // this prints out the right command path
 			return (command_path);
 		}
 		i++;
