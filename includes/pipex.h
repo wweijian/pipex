@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:07:00 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 12:21:51 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 17:26:13 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	**get_cmd_options(char** temp);
 char	*get_cmd_path(char *command, char **paths, t_data *data);
 int		count_options(char** temp);
 
-void	error_msg(char *msg, t_data *data);
+void	error_msg(char *prefix, char *suffix);
 void	free_and_exit(t_data *data);
 void	close_pipe (t_data *data);
 void	close_files (t_data *data);

@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:50:03 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/17 13:07:42 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 17:25:39 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	error_msg(char *msg, t_data *data)
+void	error_msg(char *prefix, char *suffix)
 {
-	perror(msg);
-	free_and_exit(data);
+	ft_putendl_fd(prefix, STDERR_FILENO);
+	ft_putendl_fd(": ", STDERR_FILENO);
+	ft_putendl_fd(suffix, 2);
+
 }
 
 void	free_and_exit(t_data *data)
