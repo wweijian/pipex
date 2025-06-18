@@ -6,7 +6,7 @@
 #    By: weijian <weijian@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/15 21:46:33 by wjhoe             #+#    #+#              #
-#    Updated: 2025/06/18 09:48:03 by weijian          ###   ########.fr        #
+#    Updated: 2025/06/18 13:05:27 by weijian          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ ${OBJS_PATH}:
 bonus: ${NAME}
 
 clean:
-	make -C libft clean
+	make -sC libft clean
 	rm -rf ${OBJS}
 
 fclean: clean

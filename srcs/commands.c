@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:21:36 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 10:55:06 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 13:24:36 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,17 @@ void	make_cmd(int ac, char **av, char **paths, t_data *data)
 
 	i = 2;
 	j = 0;
-	if (data->heredoc >= 0)
+	if (data->heredoc > 0)
 		i++;
 	data->cmd = malloc(sizeof(*data->cmd) * data->cmd_count);
 	while (i < ac - 1)
 	{
+		printf("\n\n>> here %d<<:", i);
+		printf("AV[I]%s\n", av[i]);
+		fflush(stdout);
 		temp = ft_split(av[i], ' ');
 		data->cmd[j].command = get_cmd_path(temp[0], paths, data);
 		data->cmd[j].options = get_cmd_options(temp);
-		data->cmd[j].pid = 0;
 		i++;
 		j++;
 		free(temp);
@@ -41,7 +43,8 @@ char	**get_cmd_options(char** temp)
 	char	**options;
 
 	i = count_options(temp);
-	options = ft_calloc(i, sizeof(*options));
+	options = malloc(sizeof(*options) * i + 1);
+	options[i + 1] = NULL;
 	while (i >= 0)
 	{
 		options[i] = temp[i];

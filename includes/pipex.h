@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:07:00 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 10:54:18 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 12:21:51 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_commands
 {	
 	char		*command;
 	char		**options;
-	int			pid;
 }					t_commands;
 
 typedef struct s_data
@@ -67,7 +66,7 @@ void	check_fileout(int ac, char **av, t_data *data);
 void	ft_pipe (t_data *data);
 void	create_process(t_data *data, int child);
 void	execute_command(int input_fd, int output_fd, t_data *data);
-int		check_exit_status(t_data *data, int child);
+int		check_exit_status(t_data *data, int child, pid_t pid);
 
 void	open_heredoc(t_data *data);
 

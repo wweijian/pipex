@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:09:34 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 10:55:49 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 12:12:45 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	check_envp(int ac, char **envp, t_data *data)
 
 	i = 0;
 	data->cmd_count = ac - 3;
-	// printf("cmd count: %d\n",data->cmd_count);
-	if (data->heredoc >= 0)
+	if (data->heredoc > 0)
 		data->cmd_count--;
 	while (envp[i])
 	{
