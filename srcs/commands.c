@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:21:36 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 13:24:36 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 15:24:40 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ void	make_cmd(int ac, char **av, char **paths, t_data *data)
 	data->cmd = malloc(sizeof(*data->cmd) * data->cmd_count);
 	while (i < ac - 1)
 	{
-		printf("\n\n>> here %d<<:", i);
-		printf("AV[I]%s\n", av[i]);
-		fflush(stdout);
 		temp = ft_split(av[i], ' ');
 		data->cmd[j].command = get_cmd_path(temp[0], paths, data);
 		data->cmd[j].options = get_cmd_options(temp);
@@ -43,8 +40,8 @@ char	**get_cmd_options(char** temp)
 	char	**options;
 
 	i = count_options(temp);
-	options = malloc(sizeof(*options) * i + 1);
-	options[i + 1] = NULL;
+	options = malloc(sizeof(*options) * (i + 1));
+	options[i] = NULL;
 	while (i >= 0)
 	{
 		options[i] = temp[i];
@@ -58,8 +55,11 @@ char	*get_cmd_path(char *command, char **paths, t_data *data)
 	int		i;
 	char	*command_path;
 	
+	if (command == 0)
+		command = "";
 	if (!access(command, F_OK | X_OK))
 		return(ft_strdup(command));
+	printf("command: %s\n", command);
 	i = 0;
 	while (paths[i])
 	{
@@ -72,8 +72,9 @@ char	*get_cmd_path(char *command, char **paths, t_data *data)
 		i++;
 		free(command_path);
 	}
-	error_msg("command path missing", data);
-	return (NULL);
+	// error_msg("command path missing", data);
+	(void) data;
+	return (ft_strdup(command));
 }
 
 int	count_options(char** temp)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 12:37:09 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 13:06:41 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 15:48:55 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_pipe (t_data *data)
 	int		child;
 	
 	child = 0;
-	dup2(data->fd_in, STDIN_FILENO);
+	dup2(-1, STDIN_FILENO);
 	while (child < data->cmd_count - 1)
 	{
 		create_process(data, child);

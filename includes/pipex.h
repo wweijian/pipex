@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:07:00 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 12:21:51 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 14:54:40 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_data
 }				t_data;
 
 t_data	*init_data (int ac, char **av, char **envp);
-// int		*make_pipe (t_data *data);
 t_data	*default_init(char** envp);
 
 void	make_cmd(int ac, char **av, char **paths, t_data *data);
@@ -52,7 +51,6 @@ int		count_options(char** temp);
 
 void	error_msg(char *msg, t_data *data);
 void	free_and_exit(t_data *data);
-void	close_pipe (t_data *data);
 void	close_files (t_data *data);
 
 char	**split_paths(char *path_variable);
@@ -68,7 +66,7 @@ void	create_process(t_data *data, int child);
 void	execute_command(int input_fd, int output_fd, t_data *data);
 int		check_exit_status(t_data *data, int child, pid_t pid);
 
-void	open_heredoc(t_data *data);
+void	open_heredoc(t_data *data, char *limiter);
 
 
 

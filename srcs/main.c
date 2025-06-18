@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:05:50 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/17 10:23:00 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 15:51:19 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,3 +19,6 @@ int main (int ac, char **av, char **envp)
 	data = init_data(ac, av, envp);
 	ft_pipe(data);
 }
+
+// not invalidate a bad command 
+// if i cannot access the file, i can open devnull

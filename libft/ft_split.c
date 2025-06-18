@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 22:09:09 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 13:32:54 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/18 15:22:49 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ char	**ft_split(char const *s, char c)
 	word_split = (char **) malloc (sizeof(char *) * (word_count + 1));
 	if (!word_split || !s)
 		return (NULL);
-	printf("[FT_SPLIT]\tav\n: %s", s);
-	printf("[FT_SPLIT]\tword count: %d", word_count);
 	while (i < word_count)
 	{
 		while (*s == c)
