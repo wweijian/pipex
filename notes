@@ -1,0 +1,2 @@
+// not invalidate a bad command 
+// if i cannot access the file, i can open devnull
