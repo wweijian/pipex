@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:05:50 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 16:55:51 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/19 09:07:32 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,5 @@ int main (int ac, char **av, char **envp)
 	
 	data = init_data(ac, av, envp);
 	ft_pipe(data);
+	free_and_exit(data);
 }

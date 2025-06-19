@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:50:03 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/19 07:57:40 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/19 09:38:37 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 void	error_msg(char *prefix, char *suffix)
 {
-	if (prefix)
+	if (!suffix)
 		perror(prefix);
 	else
-		ft_putstr_fd(strerror(errno), STDERR_FILENO);
-	if (suffix)
 	{
+		ft_putstr_fd(strerror(errno), STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);
-		ft_putstr_fd(suffix, STDERR_FILENO);
+		ft_putendl_fd(suffix, STDERR_FILENO);
 	}
-	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
 void	free_and_exit(t_data *data)

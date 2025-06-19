@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:09:34 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/19 08:15:30 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/19 09:01:55 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	check_envp(int ac, char **envp, t_data *data)
 	data->cmd_count = ac - 3;
 	if (data->heredoc > 0)
 		data->cmd_count--;
-	if (!*envp)
+	if (!envp || !*envp)
 	{
 		data->path_variable = ft_strdup("");
 		return ;
@@ -47,7 +47,7 @@ void	check_envp(int ac, char **envp, t_data *data)
 		}
 		i++;
 	}
-	error_msg("no \"PATH=\" variable found", NULL);
+	data->path_variable = ft_strdup("");
 }
 
 void	check_heredoc(char **av, t_data *data)

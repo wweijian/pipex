@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:07:00 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/19 07:14:09 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/19 10:11:12 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_data
 	int			fd_in;
 	int			fd_out;
 	int			pipe[2];
+	int			*pid;
 }				t_data;
 
 t_data	*init_data (int ac, char **av, char **envp);
@@ -49,6 +50,7 @@ void	make_cmd(int ac, char **av, char **paths, t_data *data);
 char	**get_cmd_options(char** temp);
 char	*get_cmd_path(char *command, char **paths);
 int		count_options(char** temp);
+char	*remove_single_quotes(char *str);
 
 void	error_msg(char *prefix, char *suffix);
 void	free_and_exit(t_data *data);
@@ -66,7 +68,8 @@ void	check_fileout(int ac, char **av, t_data *data);
 void	ft_pipe (t_data *data);
 void	create_process(t_data *data, int child);
 void	execute_command(int input_fd, int output_fd, t_data *data);
-int		check_exit_status(t_data *data, int child, pid_t pid);
+int		check_exit_status(t_data *data);
+
 
 void	open_heredoc(char** av, t_data *data);
 
