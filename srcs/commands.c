@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:21:36 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 18:01:50 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/19 07:32:50 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	make_cmd(int ac, char **av, char **paths, t_data *data)
 	while (i < ac - 1)
 	{
 		temp = ft_split(av[i], ' ');
-		data->cmd[j].command = get_cmd_path(temp[0], paths, data);
+		data->cmd[j].command = get_cmd_path(temp[0], paths);
 		data->cmd[j].options = get_cmd_options(temp);
 		i++;
 		j++;
@@ -39,6 +39,8 @@ char	**get_cmd_options(char** temp)
 	int		i;
 	char	**options;
 
+	if (!*temp)
+		return (ft_calloc(0, sizeof(*temp)));
 	i = count_options(temp);
 	options = malloc(sizeof(*options) * (i + 1));
 	options[i] = NULL;
@@ -50,11 +52,13 @@ char	**get_cmd_options(char** temp)
 	return (options);
 }
 
-char	*get_cmd_path(char *command, char **paths, t_data *data)
+char	*get_cmd_path(char *command, char **paths)
 {
 	int		i;
 	char	*command_path;
 	
+	if (!command)
+		return(ft_strdup(""));
 	if (!access(command, F_OK | X_OK))
 		return(ft_strdup(command));
 	i = 0;
@@ -66,8 +70,8 @@ char	*get_cmd_path(char *command, char **paths, t_data *data)
 		i++;
 		free(command_path);
 	}
-	error_msg("command path missing", data);
-	return (NULL);
+	error_msg("command path missing", NULL);
+	return (ft_strdup(""));
 }
 
 int	count_options(char** temp)

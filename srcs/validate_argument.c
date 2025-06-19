@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:09:34 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 12:12:45 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/19 08:15:30 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	validate_argument (int ac, char **av, char **envp, t_data *data)
 {
 	if (ac < 5)
-		error_msg("not enough arguments", data);
+		error_msg("not enough arguments", NULL);
 	check_heredoc(av, data);
 	// printf("data->heredoc %d\n", data->heredoc);
 	if ((data->heredoc > 0 && ac < 6))
-		error_msg("not enough arguments", data);
+		error_msg("not enough arguments", NULL);
 	check_envp(ac, envp, data);
 	check_filein(av, data);
 	check_fileout(ac, av, data);
@@ -33,6 +33,11 @@ void	check_envp(int ac, char **envp, t_data *data)
 	data->cmd_count = ac - 3;
 	if (data->heredoc > 0)
 		data->cmd_count--;
+	if (!*envp)
+	{
+		data->path_variable = ft_strdup("");
+		return ;
+	}
 	while (envp[i])
 	{
 		if (!ft_strncmp(envp[i], "PATH=", 5) && envp[i][6] != 0)
@@ -42,7 +47,7 @@ void	check_envp(int ac, char **envp, t_data *data)
 		}
 		i++;
 	}
-	error_msg("no \"PATH=\" variable found", data);
+	error_msg("no \"PATH=\" variable found", NULL);
 }
 
 void	check_heredoc(char **av, t_data *data)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:07:00 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 17:44:18 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/19 07:14:09 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_data	*default_init(char** envp);
 
 void	make_cmd(int ac, char **av, char **paths, t_data *data);
 char	**get_cmd_options(char** temp);
-char	*get_cmd_path(char *command, char **paths, t_data *data);
+char	*get_cmd_path(char *command, char **paths);
 int		count_options(char** temp);
 
 void	error_msg(char *prefix, char *suffix);

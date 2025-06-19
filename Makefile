@@ -6,7 +6,7 @@
 #    By: weijian <weijian@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/15 21:46:33 by wjhoe             #+#    #+#              #
-#    Updated: 2025/06/18 13:05:27 by weijian          ###   ########.fr        #
+#    Updated: 2025/06/19 07:30:50 by weijian          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,5 +52,7 @@ clean:
 fclean: clean
 	make -C libft fclean
 	rm -rf ${NAME}
+
+re: fclean all
 
 .PHONY: libft all clean fclean 

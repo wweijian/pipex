@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:50:03 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 17:25:39 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/19 07:57:40 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 void	error_msg(char *prefix, char *suffix)
 {
-	ft_putendl_fd(prefix, STDERR_FILENO);
-	ft_putendl_fd(": ", STDERR_FILENO);
-	ft_putendl_fd(suffix, 2);
-
+	if (prefix)
+		perror(prefix);
+	else
+		ft_putstr_fd(strerror(errno), STDERR_FILENO);
+	if (suffix)
+	{
+		ft_putstr_fd(": ", STDERR_FILENO);
+		ft_putstr_fd(suffix, STDERR_FILENO);
+	}
+	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
 void	free_and_exit(t_data *data)

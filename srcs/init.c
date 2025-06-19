@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 12:37:46 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/18 17:34:58 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/19 07:12:46 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,3 @@ t_data	*default_init(char** envp)
 	data->cmd_count = 0;
 	return (data);
 }
-
