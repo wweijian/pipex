@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_files.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 22:11:32 by weijian           #+#    #+#             */
-/*   Updated: 2025/06/18 17:44:40 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/19 13:31:48 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	check_filein(char** av, t_data *data)
 {
 	if (data->heredoc > 0)
-		open_heredoc(av, data);
+		data->fd_in = open_heredoc(av);
 	else
 		data->fd_in = open(av[1], O_RDONLY);
 	if (data->fd_in < -1)
@@ -32,10 +32,10 @@ void	check_fileout(int ac, char **av, t_data *data)
 	else
 		data->fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (data->fd_out < 0)
-		error_msg("NULL", av[ac - 1]);
+		error_msg(NULL, av[ac - 1]);
 }
 
-void	open_heredoc(char** av, t_data *data)
+int	open_heredoc(char** av)
 {
 	int		temp_fd;
 	char	*line;
@@ -57,6 +57,5 @@ void	open_heredoc(char** av, t_data *data)
 	}
 	if (line)
 		free(line);
-	close(temp_fd);
-	close_pipe(data);
+	return (temp_fd);
 }

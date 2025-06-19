@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:07:00 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/19 11:30:37 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/19 13:40:56 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*replace_char(char *str, char c);
 
 void	error_msg(char *prefix, char *suffix);
 void	free_and_exit(t_data *data);
-void	close_pipe (t_data *data);
+void	free_cmd (t_data *data);
 void	close_files (t_data *data);
 
 char	**split_paths(char *path_variable);
@@ -72,8 +72,7 @@ void	create_process(t_data *data, int child);
 void	execute_command(int input_fd, int output_fd, t_data *data);
 int		check_exit_status(t_data *data);
 
-
-void	open_heredoc(char** av, t_data *data);
+int		open_heredoc(char** av);
 
 #endif
 
