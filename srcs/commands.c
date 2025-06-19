@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:21:36 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/19 10:28:19 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/19 12:31:30 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,31 +74,4 @@ char	*get_cmd_path(char *command, char **paths)
 		free(command_path);
 	}
 	return (ft_strdup(""));
-}
-
-int	count_options(char** temp)
-{
-	int	res;
-
-	res = 0;
-	while (temp[res])
-		res++;
-	return (res);
-}
-
-char	*remove_single_quotes(char *str)
-{
-	int		i;
-	char	*res;
-	
-	if (!str || !*str)
-		return (str);
-	i = 0;
-	if (str[i] == '\'' && str[ft_strlen(str) - 1] == '\'')
-	{
-		res = ft_strtrim(str, "\'");
-		free(str);
-		return (res);
-	}
-	return (str);
 }

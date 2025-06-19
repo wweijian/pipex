@@ -1,0 +1,75 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   arg_parsing.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/19 10:40:59 by weijian           #+#    #+#             */
+/*   Updated: 2025/06/19 12:31:39 by weijian          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "pipex.h"
+
+char	*remove_single_quotes(char *str)
+{
+	int		i;
+	char	*res;
+	
+	if (!str || !*str)
+		return (str);
+	i = 0;
+	res = str;
+	if (str[i] == '\'' && str[ft_strlen(str) - 1] == '\'')
+	{
+		res = ft_strtrim(str, "\'");
+		free(str);
+	}
+	res = remove_internal_quotes(res);
+	return (res);
+}
+
+char	*remove_internal_quotes(char *str)
+{
+	char	*open_quote;
+	char	*close_quote;
+	char	*res;
+
+	open_quote = ft_strchr(str, '\'');
+	if (!open_quote)
+		return (str);
+	close_quote = ft_strchr(open_quote + 1, '\'');
+	if (!close_quote)
+		return (str);
+	res = replace_char(str, '\'');
+	return (remove_internal_quotes(res));
+}
+
+char*	replace_char(char *str, char c)
+{
+	int		i;
+	int		j;
+	int		count;
+	char*	res;
+
+	i = 0;
+	count = 0;
+	while(str[i] && count < 2)
+	{
+		if (str[i] == c)
+		{
+			j = i;
+			while (str[j])
+			{
+				str[j] = str[j + 1];
+				j++;
+			}
+			count++;
+		}
+		i++;
+	}
+	res = ft_strdup(str);
+	free(str);
+	return (res);
+}

@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:07:00 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/19 10:11:12 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/19 11:30:37 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char	**get_cmd_options(char** temp);
 char	*get_cmd_path(char *command, char **paths);
 int		count_options(char** temp);
 char	*remove_single_quotes(char *str);
+char	*remove_internal_quotes(char *str);
+char	*replace_char(char *str, char c);
 
 void	error_msg(char *prefix, char *suffix);
 void	free_and_exit(t_data *data);

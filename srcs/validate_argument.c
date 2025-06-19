@@ -6,7 +6,7 @@
 /*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:09:34 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/19 09:01:55 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/19 12:31:05 by weijian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	check_envp(int ac, char **envp, t_data *data)
 	{
 		if (!ft_strncmp(envp[i], "PATH=", 5) && envp[i][6] != 0)
 		{
-			data->path_variable = ft_substr(envp[i], 6, ft_strlen(envp[i]));
+			data->path_variable = ft_substr(envp[i], 5, ft_strlen(envp[i]));
 			return ;
 		}
 		i++;

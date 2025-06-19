@@ -6,7 +6,7 @@
 #    By: weijian <weijian@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/15 21:46:33 by wjhoe             #+#    #+#              #
-#    Updated: 2025/06/19 07:30:50 by weijian          ###   ########.fr        #
+#    Updated: 2025/06/19 10:41:13 by weijian          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT = ${LIB_PATH}libft.a
 SRCS_PATH = srcs/
 SRCS = main.c \
 		check_files.c validate_argument.c init.c exit.c paths.c \
-		commands.c pipe.c gnl_bonus.c gnl_utils_bonus.c
+		arg_parsing.c commands.c pipe.c gnl_bonus.c gnl_utils_bonus.c
 SRCS := ${addprefix ${SRCS_PATH}, ${SRCS}}
 
 OBJS_PATH = objs/
