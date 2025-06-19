@@ -6,7 +6,7 @@
 /*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:23:57 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/05 23:36:44 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/19 20:48:25 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,31 +62,18 @@ static char	*make_line(char *str)
 	return (res);
 }
 
-static char	*remaining_line(char *str)
-{
-	char	*res;
-
-	if (!str || !str[0])
-	{
-		free(str);
-		return (NULL);
-	}
-	res = gnl_strdup(gnl_strchr(str, '\n'));
-	free(str);
-	return (res);
-}
-
 char	*get_next_line(int fd)
 {
-	char		*output;
-	static char	*str[1024];
+	char	*output;
+	char	*str;
 
 	if (BUFFER_SIZE == 0 || fd < 0)
 		return (NULL);
-	str[fd] = find_line(fd, str[fd]);
-	if (!str[fd])
+	str = NULL;
+	str = find_line(fd, str);
+	if (!str)
 		return (NULL);
-	output = make_line(str[fd]);
-	str[fd] = remaining_line(str[fd]);
+	output = make_line(str);
+	free(str);
 	return (output);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:21:36 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/19 12:31:30 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/19 20:50:24 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	make_cmd(int ac, char **av, char **paths, t_data *data)
 	if (data->heredoc > 0)
 		i++;
 	data->cmd = malloc(sizeof(*data->cmd) * data->cmd_count);
+	if (!data->cmd)
+		return ;
 	while (i < ac - 1)
 	{
 		temp = ft_split(av[i], ' ');
@@ -34,7 +36,7 @@ void	make_cmd(int ac, char **av, char **paths, t_data *data)
 	}
 }
 
-char	**get_cmd_options(char** temp)
+char	**get_cmd_options(char **temp)
 {
 	int		i;
 	char	**options;
@@ -45,6 +47,8 @@ char	**get_cmd_options(char** temp)
 	while (temp[i])
 		i++;
 	options = malloc(sizeof(*options) * (i + 1));
+	if (!options)
+		return (NULL);
 	options[i] = NULL;
 	while (i >= 0)
 	{
@@ -59,11 +63,11 @@ char	*get_cmd_path(char *command, char **paths)
 {
 	int		i;
 	char	*command_path;
-	
+
 	if (!command)
-		return(ft_strdup(""));
+		return (ft_strdup(""));
 	if (!access(command, F_OK | X_OK))
-		return(ft_strdup(command));
+		return (ft_strdup(command));
 	i = 0;
 	while (paths[i])
 	{

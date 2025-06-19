@@ -3,23 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   validate_argument.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:09:34 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/19 12:31:05 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/19 20:28:42 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	validate_argument (int ac, char **av, char **envp, t_data *data)
+void	validate_argument(int ac, char **av, char **envp, t_data *data)
 {
 	if (ac < 5)
-		error_msg("not enough arguments", NULL);
+	{
+		ft_putstr_fd("usage: ./pipex infile cmd1 cmd2 .. cmdn outfile ", STDERR_FILENO);
+		ft_putendl_fd("or here_doc LIMITER cmd1 cmd2 .. cmdn outfile", STDERR_FILENO);
+		free_and_exit(data);
+	}
 	check_heredoc(av, data);
-	// printf("data->heredoc %d\n", data->heredoc);
 	if ((data->heredoc > 0 && ac < 6))
-		error_msg("not enough arguments", NULL);
+	{
+		ft_putstr_fd("usage: ./pipex infile cmd1 cmd2 .. cmdn outfile ", STDERR_FILENO);
+		ft_putendl_fd("or here_doc LIMITER cmd1 cmd2 .. cmdn outfile", STDERR_FILENO);
+		free_and_exit(data);
+	}
 	check_envp(ac, envp, data);
 	check_filein(av, data);
 	check_fileout(ac, av, data);
@@ -58,5 +65,4 @@ void	check_heredoc(char **av, t_data *data)
 	}
 	else
 		data->heredoc = 0;
-
 }

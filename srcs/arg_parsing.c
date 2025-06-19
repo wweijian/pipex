@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 10:40:59 by weijian           #+#    #+#             */
-/*   Updated: 2025/06/19 12:31:39 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/19 19:05:49 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*remove_single_quotes(char *str)
 {
 	int		i;
 	char	*res;
-	
+
 	if (!str || !*str)
 		return (str);
 	i = 0;
@@ -46,16 +46,16 @@ char	*remove_internal_quotes(char *str)
 	return (remove_internal_quotes(res));
 }
 
-char*	replace_char(char *str, char c)
+char	*replace_char(char *str, char c)
 {
 	int		i;
 	int		j;
 	int		count;
-	char*	res;
+	char	*res;
 
 	i = 0;
 	count = 0;
-	while(str[i] && count < 2)
+	while (str[i] && count < 2)
 	{
 		if (str[i] == c)
 		{

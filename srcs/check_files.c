@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_files.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 22:11:32 by weijian           #+#    #+#             */
-/*   Updated: 2025/06/19 13:31:48 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/19 20:39:06 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	check_filein(char** av, t_data *data)
+void	check_filein(char **av, t_data *data)
 {
 	if (data->heredoc > 0)
 		data->fd_in = open_heredoc(av);
@@ -27,7 +27,7 @@ void	check_filein(char** av, t_data *data)
 
 void	check_fileout(int ac, char **av, t_data *data)
 {
-	if (data->heredoc > 0) // ya okay i might not want to open it until work  needs to be done
+	if (data->heredoc > 0)
 		data->fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 0777);
 	else
 		data->fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
@@ -35,27 +35,30 @@ void	check_fileout(int ac, char **av, t_data *data)
 		error_msg(NULL, av[ac - 1]);
 }
 
-int	open_heredoc(char** av)
+int	open_heredoc(char **av)
 {
 	int		temp_fd;
 	char	*line;
 
-	temp_fd = open("temp", O_CREAT | O_WRONLY | O_TRUNC, 0777);
+	temp_fd = open(".heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0777);
 	if (temp_fd == -1)
-		error_msg("error accessing heredoc", NULL);
+		error_msg(NULL, ".heredoc");
 	while (1)
 	{
-		ft_putstr_fd("> ", STDOUT_FILENO);
+		ft_putstr_fd("heredoc > ", STDOUT_FILENO);
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
 			break ;
-		if (!ft_strncmp(line, av[2], ft_strlen(av[2]) + 1))
+		else if (!ft_strncmp(line, av[2], ft_strlen(av[2]))
+			&& *(line + ft_strlen(av[2])) == '\n')
 			break ;
 		else
 			ft_putstr_fd(line, temp_fd);
-		free(line);
+		if (line)
+			free(line);
 	}
 	if (line)
 		free(line);
-	return (temp_fd);
+	close(temp_fd);
+	return (open(".heredoc", O_RDONLY));
 }

@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:05:50 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/19 09:07:32 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/19 19:03:08 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int main (int ac, char **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
 	t_data	*data;
-	
+	int		exit_status;
+
 	data = init_data(ac, av, envp);
-	ft_pipe(data);
+	exit_status = ft_pipe(data);
 	free_and_exit(data);
+	return (exit_status);
 }
