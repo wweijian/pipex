@@ -6,7 +6,7 @@
 /*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:50:03 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/21 17:05:54 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/21 19:43:03 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	error_msg(char *prefix, char *suffix)
 	{
 		ft_putstr_fd(strerror(errno), STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);
+		if (!suffix)
+			write(2, "\n", 1);
 		ft_putendl_fd(suffix, STDERR_FILENO);
 	}
 }
