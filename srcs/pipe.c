@@ -6,7 +6,7 @@
 /*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 12:37:09 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/19 20:20:29 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/21 13:09:24 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	ft_pipe(t_data *data)
 	while (child < data->cmd_count)
 	{
 		create_process(data, child);
+		close(data->pipe[0]);
 		child++;
 	}
 	return (check_exit_status(data));
