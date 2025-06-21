@@ -6,7 +6,7 @@
 #    By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/15 21:46:33 by wjhoe             #+#    #+#              #
-#    Updated: 2025/06/19 22:10:06 by wjhoe            ###   ########.fr        #
+#    Updated: 2025/06/19 22:06:58 by wjhoe            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ ${B_OBJS}: ${OBJS_PATH}%.o: ${BONUS_PATH}%.c ${HDRS} | ${OBJS_PATH}
 
 ${OBJS_PATH}:
 	mkdir -p ${OBJS_PATH}
-9
+
 bonus: ${LIBFT} ${B_OBJS} ${HDRS}
 	${CC} ${CFLAGS} ${B_OBJS} -I${HDRS} -L. ${LIBFT} -o ${NAME}
 
