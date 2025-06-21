@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gnl.c                                              :+:      :+:    :+:   */
+/*   gnl_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:23:57 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/21 13:21:45 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/21 16:51:38 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gnl_bonus.h"
+#include "pipex_bonus.h"
 
 static char	*find_line(int fd, char *str)
 {
@@ -76,16 +76,27 @@ static char	*remaining_line(char *str)
 	return (res);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, char *lim)
 {
 	char		*output;
 	static char	*str[1024];
+	int			lim_len;
 
 	if (BUFFER_SIZE == 0 || fd < 0)
 		return (NULL);
+	lim = ft_strjoin(lim, "\n");
+	if (!lim)
+		return (NULL);
+	lim_len = ft_strlen(lim);
 	str[fd] = find_line(fd, str[fd]);
+	if (!ft_strncmp(str[fd], lim, lim_len))
+	{
+		free(lim);
+		return (str[fd]);
+	}
 	if (!str[fd])
 		return (NULL);
+	free(lim);
 	output = make_line(str[fd]);
 	str[fd] = remaining_line(str[fd]);
 	return (output);

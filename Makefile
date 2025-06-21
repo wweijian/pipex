@@ -6,13 +6,17 @@
 #    By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/15 21:46:33 by wjhoe             #+#    #+#              #
-#    Updated: 2025/06/19 22:06:58 by wjhoe            ###   ########.fr        #
+#    Updated: 2025/06/21 17:19:00 by wjhoe            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 
-HDRS = includes
+HDRS = includes/
+M_HDRS = libft.h pipex.h
+M_HDRS := ${addprefix ${HDRS}, ${M_HDRS}}
+B_HDRS = libft.h pipex_bonus.h gnl_bonus.h
+B_HDRS := ${addprefix ${HDRS}, ${B_HDRS}}
 
 LIB_PATH = libft/
 LIBFT = ${LIB_PATH}libft.a
@@ -22,7 +26,7 @@ OBJS_PATH = objs/
 SRCS_PATH = srcs/
 SRCS = main.c \
 		check_files.c validate_argument.c init.c exit.c \
-		arg_parsing.c commands.c pipe.c gnl.c gnl_utils.c
+		arg_parsing.c commands.c pipe.c
 SRCS := ${addprefix ${SRCS_PATH}, ${SRCS}}
 OBJS := $(addprefix ${OBJS_PATH}, ${notdir ${SRCS:.c=.o}})
 
@@ -39,22 +43,22 @@ CFLAGS = -Wall -Werror -Wextra -g -O0
 
 all: ${NAME}
 
-${NAME}: ${LIBFT} ${OBJS} ${HDRS}
+${NAME}: ${LIBFT} ${OBJS}
 	${CC} ${CFLAGS} ${OBJS} -I${HDRS} -L. ${LIBFT} -o ${NAME}
 
 ${LIBFT}:
 	make -C libft
 
-${OBJS}: ${OBJS_PATH}%.o: ${SRCS_PATH}%.c ${HDRS} | ${OBJS_PATH}
+${OBJS}: ${OBJS_PATH}%.o: ${SRCS_PATH}%.c ${M_HDRS}| ${OBJS_PATH}
 	${CC} ${CFLAGS} -c $< -I${HDRS} -o $@
 
-${B_OBJS}: ${OBJS_PATH}%.o: ${BONUS_PATH}%.c ${HDRS} | ${OBJS_PATH}
+${B_OBJS}: ${OBJS_PATH}%.o: ${BONUS_PATH}%.c ${B_HDRS} | ${OBJS_PATH}
 	${CC} ${CFLAGS} -c $< -I${HDRS} -o $@
 
 ${OBJS_PATH}:
 	mkdir -p ${OBJS_PATH}
 
-bonus: ${LIBFT} ${B_OBJS} ${HDRS}
+bonus: ${LIBFT} ${B_OBJS} ${B_HDRS}
 	${CC} ${CFLAGS} ${B_OBJS} -I${HDRS} -L. ${LIBFT} -o ${NAME}
 
 clean:
