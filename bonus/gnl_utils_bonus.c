@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   gnl_utils_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjhoe <wjhoe@student.42singapore.sg>       +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:56:34 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/02 15:43:37 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/21 16:51:40 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gnl_bonus.h"
+#include "pipex_bonus.h"
 
 static size_t	gnl_strlcpy(char *dst, const char *src, size_t size)
 {

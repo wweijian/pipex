@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   error_msg_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/09 23:20:39 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/21 19:45:29 by wjhoe            ###   ########.fr       */
+/*   Created: 2025/06/22 10:49:06 by wjhoe             #+#    #+#             */
+/*   Updated: 2025/06/22 11:15:23 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex_bonus.h"
 
-void	ft_putendl_fd(char *s, int fd)
+void	error_msg(char *prefix, char *suffix)
 {
-	if (!s)
-		return ;
-	while (*s)
+	if (prefix && !suffix)
+		perror(prefix);
+	else
 	{
-		write(fd, s, 1);
-		s++;
+		ft_putstr_fd(strerror(errno), STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+		if (!suffix)
+			write(2, "\n", 1);
+		ft_putendl_fd(suffix, STDERR_FILENO);
 	}
-	write(fd, "\n", 1);
 }
-
-/* int main ()
-{
-	ft_putendl_fd("water bottle", 1);
-} */

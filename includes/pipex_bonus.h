@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:07:00 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/22 13:15:30 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/22 11:13:22 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -20,6 +20,7 @@
 # include <sys/wait.h>
 # include <errno.h>
 # include "libft.h"
+# include "gnl_bonus.h"
 
 typedef struct s_commands
 {
@@ -46,10 +47,6 @@ t_data	*default_init(char **envp);
 void	free_paths(char **paths);
 char	**split_paths(char *path_variable);
 
-/* VALIDATE_ARGUMENT.C */
-void	validate_argument(int ac, char **av, char **envp, t_data *data);
-void	check_envp(int ac, char **envp, t_data *data);
-
 /* COMMANDS.C */
 void	make_cmd(int ac, char **av, char **paths, t_data *data);
 char	**get_cmd_options(char **temp);
@@ -68,9 +65,15 @@ void	close_files(t_data *data);
 void	close_pipes(t_data *data);
 void	close_dups(void);
 
-/* CHECK_FILES.C */
+/* VALIDATE_ARGUMENT.C */
+void	validate_argument(int ac, char **av, char **envp, t_data *data);
+void	check_envp(int ac, char **envp, t_data *data);
+void	check_heredoc(char **av, t_data *data);
+
+/* CHECK_FILES.c */
 void	check_filein(char **av, t_data *data);
 void	check_fileout(int ac, char **av, t_data *data);
+int		open_heredoc(char **av);
 
 /* PIPE.C */
 int		ft_pipe(t_data *data);

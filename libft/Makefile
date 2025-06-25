@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wjhoe <wjhoe@student.42singapore.sg>       +#+  +:+       +#+         #
+#    By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/11 16:16:18 by wjhoe             #+#    #+#              #
-#    Updated: 2025/06/08 13:53:00 by wjhoe            ###   ########.fr        #
+#    Updated: 2025/06/22 15:34:51 by wjhoe            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,10 +30,10 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -fr
 
+all: ${NAME}
+
 %.o: %.c
 	${CC} ${CFLAGS} -c $< -o $@
-
-all: ${NAME}
 
 ${NAME}: ${OBJS}
 		${AR} ${NAME} ${OBJS}

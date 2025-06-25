@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 10:16:51 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/16 22:21:42 by weijian          ###   ########.fr       */
+/*   Updated: 2025/06/21 13:36:31 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # endif
 
 /* ------------- Main function ------------- */
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, char *lim);
 
 /* --------------- Utilities --------------- */
 char	*gnl_strdup(const char *s);

@@ -6,11 +6,12 @@
 /*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 22:09:09 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/05/12 18:52:11 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/18 17:56:24 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 static unsigned int	ft_countwords(char const *s, char c)
 {

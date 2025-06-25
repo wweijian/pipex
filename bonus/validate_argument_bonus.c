@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_argument.c                                :+:      :+:    :+:   */
+/*   validate_argument_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:09:34 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/21 14:53:17 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/21 16:51:51 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	validate_argument(int ac, char **av, char **envp, t_data *data)
 {
-	if (ac != 5)
+	if (ac < 5)
 	{
-		ft_putendl_fd("usage: ./pipex infile cmd1 cmd2 outfile", STDERR_FILENO);
+		ft_putstr_fd("usage: ./pipex infile cmd1 cmd2 ..,", STDERR_FILENO);
+		ft_putstr_fd("cmdn outfile or here_doc ", STDERR_FILENO);
+		ft_putendl_fd("LIMITER cmd1 cmd2 .. cmdn outfile", STDERR_FILENO);
+		free_and_exit(data);
+	}
+	check_heredoc(av, data);
+	if ((data->heredoc > 0 && ac < 6))
+	{
+		ft_putstr_fd("usage: ./pipex infile cmd1 cmd2 ..,", STDERR_FILENO);
+		ft_putstr_fd("cmdn outfile or here_doc ", STDERR_FILENO);
+		ft_putendl_fd("LIMITER cmd1 cmd2 .. cmdn outfile", STDERR_FILENO);
 		free_and_exit(data);
 	}
 	check_envp(ac, envp, data);
@@ -47,4 +57,14 @@ void	check_envp(int ac, char **envp, t_data *data)
 		i++;
 	}
 	data->path_variable = ft_strdup("");
+}
+
+void	check_heredoc(char **av, t_data *data)
+{
+	if (!ft_strncmp(av[1], "here_doc", 9))
+	{
+		data->heredoc = 1;
+	}
+	else
+		data->heredoc = 0;
 }

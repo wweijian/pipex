@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   paths.c                                            :+:      :+:    :+:   */
+/*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: weijian <weijian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/15 17:38:53 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/16 18:33:08 by weijian          ###   ########.fr       */
+/*   Created: 2025/06/22 10:49:06 by wjhoe             #+#    #+#             */
+/*   Updated: 2025/06/22 11:03:12 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	**split_paths(char *path_variable)
+void	error_msg(char *prefix, char *suffix)
 {
-	char	**paths;
-	int		i;
-	char	*temp;
-
-	i = 0;
-	paths = ft_split(path_variable, ':');
-	while (paths[i])
+	if (prefix && !suffix)
+		perror(prefix);
+	else
 	{
-		temp = ft_strjoin(paths[i], "/");
-		free(paths[i]);
-		paths[i] = temp;
-		i++;
+		ft_putstr_fd(strerror(errno), STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+		if (!suffix)
+			write(2, "\n", 1);
+		ft_putendl_fd(suffix, STDERR_FILENO);
 	}
-	return (paths);
 }
