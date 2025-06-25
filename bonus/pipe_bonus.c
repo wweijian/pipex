@@ -6,7 +6,7 @@
 /*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 16:08:41 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/21 17:37:34 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/22 15:19:24 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_pipe(t_data *data)
 	if (!data->pid)
 	{
 		error_msg("malloc failure", NULL);
+		close_files(data);
 		free_and_exit(data);
 	}
 	dup2(data->fd_in, STDIN_FILENO);
@@ -54,6 +55,7 @@ void	create_process(t_data *data, int i)
 			== -1)
 		{
 			error_msg(NULL, data->cmd[i].options[0]);
+			close_dups();
 			free_and_exit(data);
 		}
 	}

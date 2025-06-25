@@ -6,7 +6,7 @@
 /*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:07:00 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/21 17:24:34 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/22 11:13:22 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	free_and_exit(t_data *data);
 void	free_cmd(t_data *data);
 void	close_files(t_data *data);
 void	close_pipes(t_data *data);
+void	close_dups(void);
 
 /* VALIDATE_ARGUMENT.C */
 void	validate_argument(int ac, char **av, char **envp, t_data *data);

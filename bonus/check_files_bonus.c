@@ -6,7 +6,7 @@
 /*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 22:11:32 by weijian           #+#    #+#             */
-/*   Updated: 2025/06/21 16:51:25 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/22 10:53:53 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	check_fileout(int ac, char **av, t_data *data)
 	if (data->fd_out < 0)
 	{
 		error_msg(NULL, av[ac - 1]);
+		close_files(data);
 		free_and_exit(data);
 	}
 }

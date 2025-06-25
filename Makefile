@@ -6,7 +6,7 @@
 #    By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/15 21:46:33 by wjhoe             #+#    #+#              #
-#    Updated: 2025/06/21 17:19:00 by wjhoe            ###   ########.fr        #
+#    Updated: 2025/06/22 20:02:33 by wjhoe            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,20 +26,21 @@ OBJS_PATH = objs/
 SRCS_PATH = srcs/
 SRCS = main.c \
 		check_files.c validate_argument.c init.c exit.c \
-		arg_parsing.c commands.c pipe.c
+		arg_parsing.c commands.c pipe.c error_msg.c
 SRCS := ${addprefix ${SRCS_PATH}, ${SRCS}}
 OBJS := $(addprefix ${OBJS_PATH}, ${notdir ${SRCS:.c=.o}})
 
 BONUS_PATH = bonus/
 B_SRCS = main_bonus.c \
 		check_files_bonus.c validate_argument_bonus.c init_bonus.c exit_bonus.c \
-		arg_parsing_bonus.c commands_bonus.c pipe_bonus.c gnl_bonus.c gnl_utils_bonus.c
+		arg_parsing_bonus.c commands_bonus.c pipe_bonus.c error_msg_bonus.c \
+		gnl_bonus.c gnl_utils_bonus.c
 B_SRCS := ${addprefix ${BONUS_PATH}, ${B_SRCS}}
 B_OBJS := $(addprefix ${OBJS_PATH}, ${notdir ${B_SRCS:.c=.o}})
 
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g -O0
+CFLAGS = -Wall -Werror -Wextra
 
 all: ${NAME}
 
@@ -63,8 +64,7 @@ bonus: ${LIBFT} ${B_OBJS} ${B_HDRS}
 
 clean:
 	make -sC libft clean
-	rm -rf ${OBJS}
-	rm -rf ${B_OBJS}
+	rm -rf ${OBJS_PATH}
 
 fclean: clean
 	make -C libft fclean

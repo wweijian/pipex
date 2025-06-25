@@ -6,7 +6,7 @@
 /*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:50:03 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/21 19:43:25 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/22 14:50:18 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	free_and_exit(t_data *data)
 {
-	close_files(data);
 	if (data)
 	{
 		if (data->heredoc == 1)
@@ -63,20 +62,6 @@ void	close_files(t_data *data)
 		close(data->fd_out);
 }
 
-void	error_msg(char *prefix, char *suffix)
-{
-	if (prefix && !suffix)
-		perror(prefix);
-	else
-	{
-		ft_putstr_fd(strerror(errno), STDERR_FILENO);
-		ft_putstr_fd(": ", STDERR_FILENO);
-		if (!suffix)
-			write(2, "\n", 1);
-		ft_putendl_fd(suffix, STDERR_FILENO);
-	}
-}
-
 void	close_pipes(t_data *data)
 {
 	if (data->pipe[0] > 0)
@@ -84,4 +69,10 @@ void	close_pipes(t_data *data)
 	if (data->pipe[1] > 0)
 		close(data->pipe[1]);
 	close_files(data);
+}
+
+void	close_dups(void)
+{
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
 }

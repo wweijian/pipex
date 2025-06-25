@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   error_msg_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 10:05:50 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/22 15:24:30 by wjhoe            ###   ########.fr       */
+/*   Created: 2025/06/22 10:49:06 by wjhoe             #+#    #+#             */
+/*   Updated: 2025/06/22 11:15:23 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int	main(int ac, char **av, char **envp)
+void	error_msg(char *prefix, char *suffix)
 {
-	t_data	*data;
-
-	data = init_data(ac, av, envp);
-	ft_pipe(data);
-	close_files(data);
-	if (data)
+	if (prefix && !suffix)
+		perror(prefix);
+	else
 	{
-		if (data->heredoc == 1)
-			unlink(".heredoc");
-		if (data->cmd)
-			free_cmd(data);
-		if (data->pid)
-			free(data->pid);
-		if (data->path_variable)
-			free(data->path_variable);
-		free(data);
+		ft_putstr_fd(strerror(errno), STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+		if (!suffix)
+			write(2, "\n", 1);
+		ft_putendl_fd(suffix, STDERR_FILENO);
 	}
-	return (0);
 }

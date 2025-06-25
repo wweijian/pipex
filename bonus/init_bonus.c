@@ -6,7 +6,7 @@
 /*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 12:37:46 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/21 16:51:43 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/22 10:51:14 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_data	*init_data(int ac, char **av, char **envp)
 	if (!data->cmd || !data->cmd->options || !data->cmd->command)
 	{
 		error_msg("malloc failure", NULL);
+		close_files(data);
 		free_and_exit(data);
 	}
 	free_paths(paths);

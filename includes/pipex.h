@@ -6,7 +6,7 @@
 /*   By: wjhoe <wjhoe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 10:07:00 by wjhoe             #+#    #+#             */
-/*   Updated: 2025/06/21 17:24:19 by wjhoe            ###   ########.fr       */
+/*   Updated: 2025/06/22 13:15:30 by wjhoe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	free_and_exit(t_data *data);
 void	free_cmd(t_data *data);
 void	close_files(t_data *data);
 void	close_pipes(t_data *data);
+void	close_dups(void);
 
 /* CHECK_FILES.C */
 void	check_filein(char **av, t_data *data);
